@@ -5,47 +5,8 @@ import { useEffect } from "react";
 import axios from 'axios'
 
 
-
-// export async function getServerSideProps() {
-  
-//   const authorization = `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`
-
-//   const config = {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/x-www-form-urlencoded",
-//       Accept: "application/json",
-//       Authorization:"Basic "+authorization
-//     },
-//     body: JSON.stringify({
-//       code: 'TuL6BQ_EAC8',
-//       client_id: process.env.CLIENT_ID,
-//       client_secret: process.env.CLIENT_SECRET,
-//       redirect_uri: "http://localhost:3000",
-//       grant_type:'authorization_code'
-//     }),
-//   };
-
-//   const response = await fetch(
-//     "https://apis.indeed.com/oauth/v2/tokens",
-//     config
-//   );
-
-//   console.log(response)
-
-//   // const data = await response.json()
-//   // console.log(data);
-
-//   return {
-//     props: {
-//       data:"null"
-//     },
-//   }
-// }
-
 export default function Home() {
 
-  //console.log(props)
   const router = useRouter();
 
   useEffect(() => {
@@ -53,9 +14,7 @@ export default function Home() {
       
       const code = router.query;
       
-      console.log(code);
-
-
+      //console.log(code)
       const getAccessToken = async()=>{
         const config = {
           method:"post",
@@ -66,41 +25,10 @@ export default function Home() {
         }
         const response = await axios(config)
 
-        console.log(response)
+        console.log(response.data)
       }
 
       getAccessToken()
-
-      // const getAccessToken = async () => {
-      //   const requestOptions = {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/x-www-form-urlencoded",
-      //       "Accept": "application/json",
-      //       "Access-Control-Allow-Origin":"http://localhost:3000",
-      //       "Access-Control-Allow-Credentials":"true"
-      //     },
-      //     body: JSON.stringify({
-      //       code: code,
-      //       client_id: process.env.CLIENT_ID,
-      //       client_secret: process.env.CLIENT_SECRET,
-      //       redirect_uri: process.env.REDIRECT_URI,
-      //       grant_type: "authorization_code",
-      //     }),
-      //   };
-
-      //   try {
-      //     const response = await fetch(
-      //       "https://apis.indeed.com/oauth/v2/tokens",
-      //       requestOptions
-      //     );
-      //     console.log(response.json());
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
-      // };
-
-      //getAccessToken();
     }
   }, [router.isReady, router.query]);
 
